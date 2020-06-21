@@ -224,9 +224,9 @@ nav {
 }
 /* BY DEFAULT HIDE LINKS */
 .links {
-  /* height: 0;
+  height: 0;
   overflow: hidden;
-  transition: var(--transition); */
+  transition: var(--transition);
 }
 /* TOGGLE CLASS */
 .show-links {
@@ -249,7 +249,8 @@ nav {
   }
   .links {
     /* IMPORTANT TO ADD */
-    height: auto;
+    height: auto; /* Imp as it would take the last set height of links ie 0 if they were hidden hence nothing shown 
+                  when switched to bigger screen */
     display: flex;
   }
   .links a {
