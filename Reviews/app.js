@@ -1,4 +1,5 @@
 // local reviews data
+// Normally we get this as an ajax request
 const reviews = [
   {
     id: 1,
@@ -37,3 +38,56 @@ const reviews = [
       "Edison bulb put a bird on it humblebrag, marfa pok pok heirloom fashion axe cray stumptown venmo actually seitan. VHS farm-to-table schlitz, edison bulb pop-up 3 wolf moon tote bag street art shabby chic. ",
   },
 ];
+// Select items
+
+const img=document.getElementById('person-img');
+const author = document.getElementById("author");
+const job = document.getElementById("job");
+const info= document.getElementById("info");
+
+const prevBtn= document.querySelector('.prev-btn');
+const nextBtn=document.querySelector('.next-btn');
+const randomBtn= document.querySelector('.random-btn');
+
+//Set starting items
+let currentitem=0;
+
+// load Initial item :
+//DOMContentLoaded is fired as soon as the doc is fully loaded and parsed
+// We use above so that we can display first item of reviews array as soon as doc is loaded
+
+window.addEventListener('DOMContentLoaded',function(e){
+    showPerson(currentitem);
+});
+
+//show person based on item
+function showPerson(person){
+  const item=reviews[person];
+  img.src=item.img;
+  author.textContent=item.name;
+  job.textContent=item.job;
+  info.textContent=item.text;
+}
+
+//show next person
+nextBtn.addEventListener("click",function(){
+  currentitem++;
+    if(currentitem>reviews.length - 1)
+    currentitem=0;
+  showPerson(currentitem);
+});
+
+//show prev person
+prevBtn.addEventListener("click",function(){
+  currentitem--;
+  if(currentitem<0)
+    currentitem=reviews.length-1;
+  showPerson(currentitem);
+});
+//Show Random person
+randomBtn.addEventListener("click", function(){
+  let num= Math.floor(Math.random()* reviews.length);
+  showPerson(num);
+})
+
+
