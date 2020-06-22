@@ -13,7 +13,41 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>menu project</h1>
+    <section class="menu">
+      <!--title-->
+      <div class="title">
+        <h2>our menu</h2>
+        <div class="underline"></div>
+      </div>
+      <!--Filter buttons-->
+      <div class="btn-container">
+        <!--<button class="filter-btn" type="button" data-id="all">All</button>--> <!--The data attribute is needed to add the dataset functionsality.here id is just a name and 'all' is the unique reference-->
+        <!-- <button class="filter-btn" type="button" data-id="breakfast">Breakfast</button>
+        <button class="filter-btn" type="button" data-id="lunch">Lunch</button>
+        <button class="filter-btn" type="button" data-id="shakes">Shakes</button> -->
+      </div>
+      <!--Menu items-->
+      <div class="section-center">
+        <!--Single item-->
+        <article class="menu-item">
+          <img src="menu-item.jpeg" class="photo" alt="img"/>
+          <div class="item-info">
+            <header>
+              <h4>ButterMilk Pancakes</h4>
+              <h4 class="price">$15</h4>
+            </header>
+            <p class="item-text">
+              Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, 
+              sed do eiusmod tempor incididunt ut labore et 
+              dolore magna aliqua. Ut enim ad minim veniam, 
+              quis nostrud exercitation ullamco laboris nisi
+              ut aliquip ex ea commodo consequat.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
     <!-- javascript -->
     <script src="app.js"></script>
   </body>

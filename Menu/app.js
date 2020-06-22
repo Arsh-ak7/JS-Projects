@@ -71,4 +71,153 @@ const menu = [
     img: "./images/item-9.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
+  {
+    id: 10,
+    title: "quar buddy",
+    category: "dinner",
+    price: 26.99,
+    img: "./images/item-9.jpeg",
+    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+  },
 ];
+//The below code is a hardcore approach as we know the categories available so if we add an item which has a category as dinner we wont be having a button to filter that out
+
+//const sectionCenter = document.querySelector('.section-center');
+//const filterBtns= document.querySelectorAll('.filter-btn');
+
+// The below meyhod can be used if you dont want a function to return the items. 
+//if we do this way we need to type this code over and over again even when we would be using the filter buttons
+
+// window.addEventListener("DOMContentLoaded",function(){
+//   let displayMenu=menu.map(function(items){
+//      //console.log(items);
+
+//      return `<article class="menu-item">
+//      <img src="${items.img}" class="photo" alt="img"/>
+//      <div class="item-info">
+//        <header>
+//          <h4>${items.title}</h4>
+//          <h4 class="price">$${items.price}</h4>
+//        </header>
+//        <p class="item-text">
+//          ${items.desc}
+//        </p>
+//      </div>
+//    </article>`;
+//   });
+//   displayMenu= displayMenu.join("");  //We need the double quotes as a parameter here because if we dont have them then there would be commas in between the aritcle code
+//   //console.log(displayMenu);
+//   sectionCenter.innerHTML=displayMenu;
+// });
+
+// //Method using the function
+// window.addEventListener("DOMContentLoaded",function(){
+//  displayMenuItems(menu);
+// });
+
+// //Filter Buttons
+// filterBtns.forEach(function(btn){
+//   btn.addEventListener("click", function(e){
+//     const category=e.currentTarget.dataset.id;
+//     const menuCategory = menu.filter(function(menuItems){
+//       if(menuItems.category==category){
+//         return menuItems;
+//       }
+//     });
+//     //console.log(menuCategory);
+//     if(category=="all")
+//     displayMenuItems(menu);
+//     else
+//     displayMenuItems(menuCategory);
+//   });
+// });
+
+
+// function displayMenuItems(menuItems){
+//   let displayMenu=menuItems.map(function(items){
+//     return `<article class="menu-item">
+//     <img src="${items.img}" class="photo" alt="img"/>
+//     <div class="item-info">
+//       <header>
+//         <h4>${items.title}</h4>
+//         <h4 class="price">$${items.price}</h4>
+//       </header>
+//       <p class="item-text">
+//         ${items.desc}
+//       </p>
+//     </div>
+//   </article>`;
+//  });
+//  displayMenu= displayMenu.join("");  //We need the double quotes as a parameter here because if we dont have them then there would be commas in between the aritcle code
+//  //console.log(displayMenu);
+//  sectionCenter.innerHTML=displayMenu;
+// }
+
+//A More dynamic Approach
+// 1. Get only unique categories
+// 2. iterate over the categories return buttons
+// 3. make sure to slect buttons only when they are available
+
+const sectionCenter = document.querySelector('.section-center');
+const btnContainer = document.querySelector('.btn-container');
+//If filter button is placed here we get an empty nodeList because we are adding buttoms dynamically and they havent been loaded yet. hence nothing happens when we click them
+//const filterBtns= document.querySelectorAll('.filter-btn');
+
+window.addEventListener("DOMContentLoaded",function(){
+ displayMenuItems(menu);
+ displayMenuButtons();   
+  });
+
+function displayMenuItems(menuItems){
+  let displayMenu=menuItems.map(function(items){
+    return `<article class="menu-item">
+    <img src="${items.img}" class="photo" alt="img"/>
+    <div class="item-info">
+      <header>
+        <h4>${items.title}</h4>
+        <h4 class="price">$${items.price}</h4>
+      </header>
+      <p class="item-text">
+        ${items.desc}
+      </p>
+    </div>
+  </article>`;
+ });
+ displayMenu= displayMenu.join("");  //We need the double quotes as a parameter here because if we dont have them then there would be commas in between the aritcle code
+ //console.log(displayMenu);
+ sectionCenter.innerHTML=displayMenu;
+}
+
+function displayMenuButtons(){
+  displayMenuItems(menu);
+//    const categories =  menu.map(function(item){
+//    return item.category; //Returns the whole array of categories
+      const categories=menu.reduce(function(values,item){
+        if(!values.includes(item.category))
+        values.push(item.category);
+        return values;
+      },['all'])//Initialize with all
+        const categoryBtns = categories.map(function(category){
+          return `<button class="filter-btn" type="button" data-id="${category}">${category}</button>`;
+        }).join("");
+        //console.log(categoryBtns);
+        btnContainer.innerHTML=categoryBtns;
+        const filterBtns= document.querySelectorAll('.filter-btn');
+        //Filter Buttons
+        filterBtns.forEach(function(btn){
+          btn.addEventListener("click", function(e){
+          const category=e.currentTarget.dataset.id;
+          const menuCategory = menu.filter(function(menuItems){
+          if(menuItems.category==category){
+          return menuItems;
+      }
+    });
+    //console.log(menuCategory);
+        if(category=="all")
+        displayMenuItems(menu);
+        else
+        displayMenuItems(menuCategory);
+      });
+    });
+    
+}
